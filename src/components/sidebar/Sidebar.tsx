@@ -17,7 +17,7 @@ const Sidebar: React.FC = () => {
 };
 
 function onDragStart(event: React.DragEvent, pluginId: string) {
-  event.dataTransfer.setData("text/plain", pluginId);
+  event.dataTransfer.setData("text/plain", JSON.stringify({pluginId}));
 }
 
 export default Sidebar;
