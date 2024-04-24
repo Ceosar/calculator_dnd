@@ -3,7 +3,7 @@ import classes from "./Numbers.module.css";
 
 const Numbers: React.FC = () => {
   return (
-    <section className={classes.numbers_wrapper} draggable>
+    <section className={classes.numbers_wrapper}>
       <span className={classes.numbers_span}>
         <button>7</button>
         <button>8</button>

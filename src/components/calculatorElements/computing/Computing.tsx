@@ -3,7 +3,7 @@ import classes from "./Computing.module.css";
 
 const Computing: React.FC = () => {
   return (
-    <section className={classes.computing_wrapper} draggable>
+    <section className={classes.computing_wrapper}>
       <span className={classes.computing_span}>
         <button>/</button>
         <button>x</button>

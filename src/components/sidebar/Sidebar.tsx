@@ -6,6 +6,9 @@ import Numbers from "../calculatorElements/numbers/Numbers";
 import Computing from "../calculatorElements/computing/Computing";
 
 const Sidebar: React.FC = () => {
+  const onDragStart = (event: React.DragEvent, params:any) => {
+    event.dataTransfer.setData("paramsElem", JSON.stringify(params));
+  }
   return (
     <div className={classes.sidebar_wrapper}>
         <div draggable onDragStart={(e) => onDragStart(e, {elemId: "display", height: 1} )}>
@@ -24,8 +27,5 @@ const Sidebar: React.FC = () => {
   );
 };
 
-function onDragStart(event: React.DragEvent, params:any) {
-  event.dataTransfer.setData("paramsElem", JSON.stringify(params));
-}
 
 export default Sidebar;

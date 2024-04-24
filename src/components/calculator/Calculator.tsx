@@ -11,17 +11,10 @@ import Computing from "../calculatorElements/computing/Computing";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const Calculator: React.FC = () => {
-  // var height = 1;
-
   const [layout, setLayout] = useState(() => {
     const savedLayout = localStorage.getItem("layout");
     return savedLayout ? JSON.parse(savedLayout) : [];
   });
-
-  // const saveLayoutToLocalStorage = (newLayout: Layout[]) => {
-  //   setLayout(newLayout);
-  //   localStorage.setItem("layout", JSON.stringify(newLayout));
-  // };
 
   const onLayoutChange = (layoutChange: Layout[]) => {
     layoutChange.map((item) => {
@@ -31,7 +24,6 @@ const Calculator: React.FC = () => {
     });
     setLayout(layoutChange);
     localStorage.setItem("layout", JSON.stringify(layoutChange));
-    // saveLayoutToLocalStorage(layoutChange);
   };
 
   const onDrop = (lay: Layout[], item: Layout, e: any) => {
@@ -39,7 +31,6 @@ const Calculator: React.FC = () => {
 
     const elemParams = JSON.parse(e.dataTransfer.getData("paramsElem"));
     console.log(elemParams);
-    // height = elemParams.height;
 
     setLayout([
       ...new_lay,
@@ -49,16 +40,6 @@ const Calculator: React.FC = () => {
         h: elemParams.height,
       },
     ]);
-  };
-
-  const generateDOM = () => {
-    return layout.map((l: Layout, i: number) => {
-      return (
-        <div key={l.i} className="layout-item">
-          {l.i === "display" ? <Display /> : <Equal />}
-        </div>
-      );
-    });
   };
 
   return (
@@ -91,7 +72,6 @@ const Calculator: React.FC = () => {
           </div>
         );
       })}
-      {/* {generateDOM()} */}
     </ResponsiveGridLayout>
   );
 };
