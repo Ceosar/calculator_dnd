@@ -6,81 +6,47 @@ import classes from "./Calculator.module.css";
 import Display from "../calculatorElements/display/Display";
 import Equal from "../calculatorElements/equal/Equal";
 
-const ResponsiveReactGridLayout = WidthProvider(Responsive);
+const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const Calculator: React.FC = () => {
   const [layout, setLayout] = useState(() => {
     const savedLayout = localStorage.getItem("layout");
     return savedLayout ? JSON.parse(savedLayout) : [];
   });
-  // const [layout, setLayout] = useState<Layout[]>([]);
-  const [dropCoordinates, setDropCoordinates] = useState<{
-    x: number;
-    y: number;
-  } | null>(null);
 
-  console.log(layout);
+  // const [layout, setLayout] = useState<Layout[]>([]);
+
+  // const onLayoutChange = (layoutChange: Layout[]) => {
+  //   setLayout(layoutChange);
+  //   console.log(layoutChange);
+  //   localStorage.setItem("layout", JSON.stringify(layoutChange));
+  // };
 
   const onLayoutChange = (layoutChange: Layout[]) => {
-    layoutChange.map((item) => {
-      if (item.i == "__dropping-elem__") {
-        // setDropCoordinates((prevDropCoordinates) => ({
-        //   ...prevDropCoordinates,
-        //   x: item.x,
-        //   y: item.y,
-        // }));
-        setDropCoordinates({ x: item.x, y: item.y });
-      }
-      else{
-        localStorage.setItem("layout", JSON.stringify(layoutChange));
-        console.log(1);
-        console.log(layoutChange);
-      }
-    });
-    // setLayout(layoutChange)
+    console.log("onchange");
+    localStorage.setItem("layout", JSON.stringify(layout));
   };
 
   const onDrop = (lay: Layout[], item: Layout, e: any) => {
-    e.preventDefault();
-    // const pluginId = e.dataTransfer.getData("text/plain");
-    if (dropCoordinates) {
-      console.log(dropCoordinates);
-      const { pluginId } = JSON.parse(e.dataTransfer.getData("text/plain"));
-      // const { x, y, ...rest } = item;
-      // const newItem: Layout = {
-      //   ...rest,
-      //   w: 1,
-      //   h: 1,
-      //   i: pluginId,
-      //   isResizable: false,
-      // };
-      // setLayouts([...layouts, newItem]);
+    const elemId = e.dataTransfer.getData("text/plain");
+    const new_lay = [...lay].slice(0, -1);
 
-
-      const new_lay = [...lay].slice(0, -1);
-
-      // saveDataElement(item, dataElement);
-
-      setLayout([
-        ...new_lay,
-        {
-          ...item,
-          x: item.x,
-          y: dropCoordinates.y,
-          w: 1,
-          h: 1,
-          i: pluginId,
-          isResizable: false,
-        },
-      ]);
-      // localStorage.setItem("layout", JSON.stringify(layout));
-    }
+    console.log("ondrop");
+    setLayout([
+      ...new_lay,
+      {
+        ...item,
+        i: elemId === "display" || elemId === "equal" ? elemId : item.i,
+        x: item.x,
+        y: item.y,
+        w: 1,
+        h: 1,
+      },
+    ]);
   };
 
   const generateDOM = () => {
-    console.log(layout);
     return layout.map((l: Layout, i: number) => {
-      console.log(l.i);
       return (
         <div key={i} className="layout-item">
           {l.i === "display" ? <Display /> : <Equal />}
@@ -90,19 +56,26 @@ const Calculator: React.FC = () => {
   };
 
   return (
-    <ResponsiveReactGridLayout
-      layouts={{ lg: layout }}
-      cols={{ lg: 1, md: 1, sm: 1, xs: 1, xxs: 1 }}
-      onDrop={onDrop}
+    <ResponsiveGridLayout
       className={classes.calculator_wrapper}
+      cols={{ lg: 1, md: 1, sm: 1, xs: 1, xxs: 1 }}
+      layouts={{ lg: layout }}
       isDraggable
       isDroppable
+      onDrop={onDrop}
       compactType={null}
       preventCollision
       onLayoutChange={onLayoutChange}
     >
-      {generateDOM()}
-    </ResponsiveReactGridLayout>
+      {layout.map((item: Layout, i: number) => {
+        return (
+          <div key={i} id={item.i} className="layout-item">
+            {item.i === "display" ? <Display /> : <Equal />}
+          </div>
+        );
+      })}
+      {/* {generateDOM()} */}
+    </ResponsiveGridLayout>
   );
 };
 
