@@ -1,69 +1,23 @@
 import React from "react";
 import classes from "./Sidebar.module.css";
-import { Draggable, Droppable } from "react-beautiful-dnd";
+import Equal from "../calculatorElements/equal/Equal";
+import Display from "../calculatorElements/display/Display";
 
 const Sidebar: React.FC = () => {
   return (
-    <Droppable droppableId="sidebarDroppable">
-      {(provided) => (
-        <div
-          className={classes.sidebar}
-          ref={provided.innerRef}
-          {...provided.droppableProps}
-        >
-          <Draggable draggableId="draggableSidebar1" index={5}>
-            {(provided) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                className={classes.draggable}
-              >
-                Sidebar Block 1
-              </div>
-            )}
-          </Draggable>
-          <Draggable draggableId="draggableSidebar2" index={6}>
-            {(provided) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                className={classes.draggable}
-              >
-                Sidebar Block 2
-              </div>
-            )}
-          </Draggable>
-          <Draggable draggableId="draggableSidebar3" index={7}>
-            {(provided) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                className={classes.draggable}
-              >
-                Sidebar Block 3
-              </div>
-            )}
-          </Draggable>
-          <Draggable draggableId="draggableSidebar4" index={8}>
-            {(provided) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                className={classes.draggable}
-              >
-                Sidebar Block 4
-              </div>
-            )}
-          </Draggable>
-          {provided.placeholder}
+    <div className={classes.sidebar_wrapper}>
+        <div draggable onDragStart={(e) => onDragStart(e, "display")}>
+          <Display />
         </div>
-      )}
-    </Droppable>
+        <div draggable onDragStart={(e) => onDragStart(e, "equal")}>
+          <Equal />
+        </div>
+    </div>
   );
 };
+
+function onDragStart(event: React.DragEvent, pluginId: string) {
+  event.dataTransfer.setData("text/plain", pluginId);
+}
 
 export default Sidebar;

@@ -1,77 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
+import { Responsive, WidthProvider, Layout } from "react-grid-layout";
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
 import classes from "./Calculator.module.css";
-import { Draggable, Droppable } from "react-beautiful-dnd";
+import Display from "../calculatorElements/display/Display";
+import Equal from "../calculatorElements/equal/Equal";
+
+const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const Calculator: React.FC = () => {
+  const [layouts, setLayouts] = useState<Layout[]>([]);
+  // const [layout, setLayout] = useState<Layout[]>([]);
+
+  const onLayoutChange = (layoutChange: Layout[]) => {
+    console.log(layoutChange);
+  }
+
+  const onDrop = (layout: Layout[], item: Layout, event: React.DragEvent) => {
+    const pluginId = event.dataTransfer.getData("text/plain");
+    const newItem: Layout = {
+      x: item.x,
+      y: item.y,
+      w: 2,
+      h: 2,
+      i: pluginId,
+      isResizable:false
+    };
+    setLayouts([...layouts, newItem]);
+  };
+
+  const generateDOM = () => {
+    return layouts.map((l: Layout, i: number) => (
+      <div key={i} className="layout-item">
+        {l.i === "display" ? <Display/> : <Equal/>}
+      </div>
+    ));
+  };
+
   return (
-    <Droppable droppableId="droppable">
-      {(provided, snapshotDroppable) => (
-        <div
-          className={`${classes.calculator} ${
-            snapshotDroppable.isDraggingOver ? classes.droppableHighlighted : ""
-          }`}
-          // className={classes.calculator}
-          ref={provided.innerRef}
-          {...provided.droppableProps}
-        >
-          <Draggable draggableId="draggable1" index={0}>
-            {(provided) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                className={classes.draggable}
-              >
-                Block 1
-              </div>
-            )}
-          </Draggable>
-          <Draggable draggableId="draggable2" index={1}>
-            {(provided) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                className={classes.draggable}
-              >
-                Block 2
-              </div>
-            )}
-          </Draggable>
-          <Draggable draggableId="draggable3" index={2}>
-            {(provided) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                className={classes.draggable}
-              >
-                Block 3
-              </div>
-            )}
-          </Draggable>
-          <Draggable draggableId="draggable4" index={3}>
-            {(provided) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                className={classes.draggable}
-              >
-                Block 4
-              </div>
-            )}
-          </Draggable>
-          {provided.placeholder}
-          {snapshotDroppable.isDraggingOver && (
-            <div
-              className={classes.draggableGhost}
-              style={{ height: "50px" }}
-            />
-          )}
-        </div>
-      )}
-    </Droppable>
+    <ResponsiveReactGridLayout
+      layouts={{ lg: layouts }}
+      cols={{ lg: 1, md: 1, sm: 1, xs: 1, xxs: 1 }}
+      onDrop={onDrop}
+      className={classes.calculator_wrapper}
+      isDraggable
+      isDroppable
+      compactType={null}
+      preventCollision
+      onLayoutChange={onLayoutChange}
+    >
+      {generateDOM()}
+    </ResponsiveReactGridLayout>
   );
 };
 
