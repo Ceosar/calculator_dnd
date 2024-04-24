@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./Sidebar.module.css";
 import Equal from "../calculatorElements/equal/Equal";
 import Display from "../calculatorElements/display/Display";
+import Numbers from "../calculatorElements/numbers/Numbers";
 
 const Sidebar: React.FC = () => {
   return (
@@ -11,6 +12,9 @@ const Sidebar: React.FC = () => {
         </div>
         <div draggable onDragStart={(e) => onDragStart(e, "equal")}>
           <Equal />
+        </div>
+        <div draggable onDragStart={(e) => onDragStart(e, "numbers")}>
+          <Numbers />
         </div>
     </div>
   );

@@ -6,7 +6,6 @@ const Equal: React.FC = () => {
     <section
       className={classes.equal_wrapper}
       draggable
-    //   onDragStart={(e) => onDragStart(e, "plugin1")}
     >
       <span className={classes.equal_span}>=</span>
     </section>
