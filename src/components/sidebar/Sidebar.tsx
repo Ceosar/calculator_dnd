@@ -3,25 +3,29 @@ import classes from "./Sidebar.module.css";
 import Equal from "../calculatorElements/equal/Equal";
 import Display from "../calculatorElements/display/Display";
 import Numbers from "../calculatorElements/numbers/Numbers";
+import Computing from "../calculatorElements/computing/Computing";
 
 const Sidebar: React.FC = () => {
   return (
     <div className={classes.sidebar_wrapper}>
-        <div draggable onDragStart={(e) => onDragStart(e, "display")}>
+        <div draggable onDragStart={(e) => onDragStart(e, {elemId: "display", height: 1} )}>
           <Display />
         </div>
-        <div draggable onDragStart={(e) => onDragStart(e, "equal")}>
-          <Equal />
+        <div draggable onDragStart={(e) => onDragStart(e, {elemId: "computing", height: 1} )}>
+          <Computing />
         </div>
-        <div draggable onDragStart={(e) => onDragStart(e, "numbers")}>
+        <div draggable onDragStart={(e) => onDragStart(e, {elemId: "numbers", height: 4} )}>
           <Numbers />
+        </div>
+        <div draggable onDragStart={(e) => onDragStart(e, {elemId: "equal", height: 1} )}>
+          <Equal />
         </div>
     </div>
   );
 };
 
-function onDragStart(event: React.DragEvent, elemId:string) {
-  event.dataTransfer.setData("text/plain", elemId);
+function onDragStart(event: React.DragEvent, params:any) {
+  event.dataTransfer.setData("paramsElem", JSON.stringify(params));
 }
 
 export default Sidebar;
