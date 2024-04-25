@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import classes from "./Computing.module.css";
+
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+
 import { computeValue, displayValue } from "../../../services/store/store";
 
-const Computing: React.FC = () => {
-  const inputValue: any = [];
+import classes from "./Computing.module.css";
 
+const Computing: React.FC = () => {
   const dispatch = useDispatch();
   const mode = useSelector((state: any) => state.mode);
   const computingValue = useSelector((state: any) => state.value);

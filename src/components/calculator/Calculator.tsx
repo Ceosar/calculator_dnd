@@ -88,7 +88,7 @@ const Calculator: React.FC = () => {
           rowHeight={90}
           onLayoutChange={onLayoutChange}
         >
-          {layout.map((item: Layout, i: number) => {
+          {layout.map((item: Layout, _i: number) => {
             return (
               <div
                 key={item.i}
@@ -114,7 +114,7 @@ const Calculator: React.FC = () => {
         <div className={classes.calculator_wrapper__active}>
           {layout
             .sort((a: any, b: any) => a.y - b.y)
-            .map((item: Layout, i: number) => {
+            .map((item: Layout, _i: number) => {
               return (
                 <div key={item.i} id={item.i}>
                   {item.i === "display" ? (

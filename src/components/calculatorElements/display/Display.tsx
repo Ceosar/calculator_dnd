@@ -11,8 +11,6 @@ const Display: React.FC = () => {
   const computingValue = useSelector((state: any) => state.value);
   const inputNumber = valueOnDisplay;
 
-  console.log(computingValue);
-
   const handleClickBtn = () => {
     if (!mode) {
       dispatch(computeValue(computingValue.slice(0, -1)));
