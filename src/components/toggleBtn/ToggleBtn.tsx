@@ -16,6 +16,7 @@ import classes from "./ToggleBtn.module.css";
 const ToggleBtn: React.FC = () => {
   const dispatch = useDispatch();
   const mode = useSelector((state: any) => state.mode);
+  const draggableItems = useSelector((state: any) => state.draggableItems);
 
   const handleClickBtn = () => {
     dispatch(setToggleBtn(!mode));
@@ -29,7 +30,14 @@ const ToggleBtn: React.FC = () => {
       className={`${classes.toggle__wrapper} ${
         mode ? classes.off : classes.on
       } `}
-      onClick={() => handleClickBtn()}
+      style={{ pointerEvents: draggableItems.length ? "auto" : "none" }}
+      onClick={() => {
+        if (draggableItems.length !== 4) {
+          alert("Соберите калькулятор полностью!");
+        } else {
+          handleClickBtn();
+        }
+      }}
     >
       <div className={classes.modes_wrapper}>
         <div className={`${classes.mode} ${mode ? "" : classes.active}`}>

@@ -27,7 +27,10 @@ const Sidebar: React.FC = () => {
     if (layouts) {
       const layout = JSON.parse(layouts);
       const draggableItemsStore = layout.map((item: any) => item.i);
-      setDisplayDrag(!draggableItemsStore.includes("display"));
+      setDisplayDrag(
+        !draggableItemsStore.includes("display") ||
+          draggableItems.some((item: any) => item.y === 0)
+      );
       setEqualDrag(!draggableItemsStore.includes("equal"));
       setComputingDrag(!draggableItemsStore.includes("computing"));
       setNumbersDrag(!draggableItemsStore.includes("numbers"));
@@ -49,7 +52,10 @@ const Sidebar: React.FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    setDisplayDrag(!draggableItems.includes("display"));
+    setDisplayDrag(
+      !draggableItems.includes("display") ||
+        draggableItems.some((item: any) => item.y === 0)
+    );
     setEqualDrag(!draggableItems.includes("equal"));
     setComputingDrag(!draggableItems.includes("computing"));
     setNumbersDrag(!draggableItems.includes("numbers"));
