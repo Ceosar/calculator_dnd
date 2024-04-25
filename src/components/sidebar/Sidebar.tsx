@@ -23,6 +23,19 @@ const Sidebar: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const layouts = localStorage.getItem("layout");
+    if (layouts) {
+      const layout = JSON.parse(layouts);
+      const draggableItemsStore = layout.map((item: any) => item.i);
+      setDisplayDrag(!draggableItemsStore.includes("display"));
+      setEqualDrag(!draggableItemsStore.includes("equal"));
+      setComputingDrag(!draggableItemsStore.includes("computing"));
+      setNumbersDrag(!draggableItemsStore.includes("numbers"));
+    }
+    return () => {};
+  }, []);
+
+  useEffect(() => {
     const handleStorageChange = () => {
       const localStorageItems = Object.keys(localStorage);
       dispatch(setDraggableItems(localStorageItems));
@@ -43,18 +56,6 @@ const Sidebar: React.FC = () => {
     return () => {};
   }, [draggableItems]);
 
-  useEffect(() => {
-    const layouts = localStorage.getItem("layout");
-    if (layouts) {
-      const layout = JSON.parse(layouts);
-      const draggableItemsStore = layout.map((item: any) => item.i);
-      setDisplayDrag(!draggableItemsStore.includes("display"));
-      setEqualDrag(!draggableItemsStore.includes("equal"));
-      setComputingDrag(!draggableItemsStore.includes("computing"));
-      setNumbersDrag(!draggableItemsStore.includes("numbers"));
-    }
-    return () => {};
-  }, []);
 
   const onDragStart = (event: React.DragEvent, params: any) => {
     switch (params.elemId) {

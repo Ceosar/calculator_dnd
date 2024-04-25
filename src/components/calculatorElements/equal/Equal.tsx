@@ -15,17 +15,6 @@ const Equal: React.FC = () => {
   const valueOnDisplay = useSelector((state: any) => state.value);
   const mode = useSelector((state: any) => state.mode);
 
-  const computeResult = () => {
-    if (!mode) {
-      try {
-        const result = evaluate(computingValue);
-        dispatch(displayValue(result.toString()));
-        dispatch(computeValue(""));
-        dispatch(computeValue(result.toString()));
-      } catch (_error) {}
-    }
-  };
-
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!mode) {
@@ -41,6 +30,17 @@ const Equal: React.FC = () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [mode, valueOnDisplay, dispatch]);
+
+  const computeResult = () => {
+    if (!mode) {
+      try {
+        const result = evaluate(computingValue);
+        dispatch(displayValue(result.toString()));
+        dispatch(computeValue(""));
+        dispatch(computeValue(result.toString()));
+      } catch (_error) {}
+    }
+  };
 
   return (
     <section className={classes.equal_wrapper}>

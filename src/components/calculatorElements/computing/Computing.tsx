@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -13,12 +13,37 @@ const Computing: React.FC = () => {
   const computingValue = useSelector((state: any) => state.value);
   const valueOnDisplay = useSelector((state: any) => state.dispValue);
 
-  const handleClickBtn = (compute: string) => {
-    if (!mode) {
-      dispatch(displayValue(""));
-      dispatch(computeValue(computingValue + compute));
+  const [activeBtn, setActiveBtn] = useState("");
+
+  useEffect(() => {
+    if (computingValue) {
+      if (
+        !computingValue.endsWith("+") ||
+        !computingValue.endsWith("-") ||
+        !computingValue.endsWith("*") ||
+        !computingValue.endsWith("/")
+      ) {
+        setActiveBtn("");
+      }
     }
-  };
+    switch (computingValue.slice(-1)) {
+      case "+":
+        setActiveBtn("+");
+        break;
+      case "-":
+        setActiveBtn("-");
+        break;
+      case "*":
+        setActiveBtn("*");
+        break;
+      case "/":
+        setActiveBtn("/");
+        break;
+
+      default:
+        break;
+    }
+  }, [computingValue]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -50,13 +75,40 @@ const Computing: React.FC = () => {
     };
   }, [mode, valueOnDisplay, dispatch]);
 
+  const handleClickBtn = (compute: string) => {
+    if (!mode) {
+      dispatch(displayValue(""));
+      dispatch(computeValue(computingValue + compute));
+    }
+  };
+
   return (
     <section className={classes.computing_wrapper}>
       <span className={classes.computing_span}>
-        <button onClick={() => handleClickBtn("/")}>/</button>
-        <button onClick={() => handleClickBtn("*")}>x</button>
-        <button onClick={() => handleClickBtn("-")}>-</button>
-        <button onClick={() => handleClickBtn("+")}>+</button>
+        <button
+          className={activeBtn === "/" ? classes.activeBtn : ""}
+          onClick={() => handleClickBtn("/")}
+        >
+          /
+        </button>
+        <button
+          className={activeBtn === "*" ? classes.activeBtn : ""}
+          onClick={() => handleClickBtn("*")}
+        >
+          x
+        </button>
+        <button
+          className={activeBtn === "-" ? classes.activeBtn : ""}
+          onClick={() => handleClickBtn("-")}
+        >
+          -
+        </button>
+        <button
+          className={activeBtn === "+" ? classes.activeBtn : ""}
+          onClick={() => handleClickBtn("+")}
+        >
+          +
+        </button>
       </span>
     </section>
   );

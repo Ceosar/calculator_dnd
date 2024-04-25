@@ -23,3 +23,7 @@
     border: 3px solid rgba(130, 131, 131, 0.359);
     border-radius: 5px;
 }
+
+.activeBtn{
+    background-color: rgb(93,95,239);
+}

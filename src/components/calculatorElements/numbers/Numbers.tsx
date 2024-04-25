@@ -13,14 +13,6 @@ const Numbers: React.FC = () => {
   const computingValue = useSelector((state: any) => state.value)
   const mode = useSelector((state: any) => state.mode);
 
-  const handleClickBtn = (num:string) => {
-    if(!mode){
-      dispatch(displayValue(""))
-      dispatch(displayValue(valueOnDisplay + num))
-      dispatch(computeValue(computingValue + num))
-    }
-  }
-
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!mode) {
@@ -40,6 +32,14 @@ const Numbers: React.FC = () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [mode, valueOnDisplay, dispatch]);
+
+  const handleClickBtn = (num:string) => {
+    if(!mode){
+      dispatch(displayValue(""))
+      dispatch(displayValue(valueOnDisplay + num))
+      dispatch(computeValue(computingValue + num))
+    }
+  }
 
   return (
     <section className={classes.numbers_wrapper}>

@@ -17,6 +17,7 @@ const App: React.FC = () => {
     const t1 = gsap.timeline({defaults: {duration:2}});
     t1.from(".main_app", {opacity:0})
   }, []);
+
   return (
     <Provider store={store}>
       <div className="main_app">
