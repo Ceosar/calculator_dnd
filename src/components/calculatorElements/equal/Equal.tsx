@@ -13,11 +13,12 @@ const Equal: React.FC = () => {
 
   const computeResult = () => {
     if (!mode) {
-      try{
+      try {
         const result = evaluate(computingValue);
         dispatch(displayValue(result.toString()));
-      }
-      catch(error){
+        dispatch(computeValue(""));
+        dispatch(computeValue(result.toString()));
+      } catch (error) {
         console.log(error);
       }
     }
@@ -27,7 +28,7 @@ const Equal: React.FC = () => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!mode) {
         const numKey = event.key;
-        if(numKey === "Enter" || numKey === "="){
+        if (numKey === "Enter" || numKey === "=") {
           computeResult();
         }
       }
