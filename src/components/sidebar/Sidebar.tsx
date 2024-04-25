@@ -15,6 +15,7 @@ const Sidebar: React.FC = () => {
   const [numbersDrag, setNumbersDrag] = useState(true);
 
   const draggableItems = useSelector((state: any) => state.draggableItems);
+  const mode = useSelector((state: any) => state.mode);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -73,7 +74,7 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <div className={classes.sidebar_wrapper}>
+    <div className={classes.sidebar_wrapper} style={{ display: mode ? "flex" : "none"}}>
       <div
         draggable={displayDrag}
         onDragStart={(e) => onDragStart(e, { elemId: "display", height: 1 })}
