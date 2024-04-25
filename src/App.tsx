@@ -14,18 +14,17 @@ import "./App.css";
 
 const App: React.FC = () => {
   useEffect(() => {
-    const t1 = gsap.timeline({defaults: {duration:2}});
-    t1.from(".main_app", {opacity:0})
+    const t1 = gsap.timeline({ defaults: { duration: 2 } });
+    t1.from(".main_app", { opacity: 0 });
   }, []);
 
   return (
     <Provider store={store}>
       <div className="main_app">
+        <div className="calculator__container"></div>
         <ToggleBtn />
-        <div className="calculator__container">
-          <Sidebar />
-          <Calculator />
-        </div>
+        <Sidebar />
+        <Calculator />
       </div>
     </Provider>
   );

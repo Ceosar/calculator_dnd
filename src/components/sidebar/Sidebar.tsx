@@ -56,7 +56,6 @@ const Sidebar: React.FC = () => {
     return () => {};
   }, [draggableItems]);
 
-
   const onDragStart = (event: React.DragEvent, params: any) => {
     switch (params.elemId) {
       case "display":
@@ -79,7 +78,11 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <div className={classes.sidebar_wrapper} style={{ display: mode ? "flex" : "none"}}>
+    <div
+      className={classes.sidebar_wrapper}
+      // style={{ display: mode ? "flex" : "hidden" }}
+      style={{ visibility: mode ? "visible" : "hidden" }}
+    >
       <div
         draggable={displayDrag}
         onDragStart={(e) => onDragStart(e, { elemId: "display", height: 1 })}
