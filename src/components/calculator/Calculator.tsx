@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
+
 import { Responsive, WidthProvider, Layout } from "react-grid-layout";
-import "react-grid-layout/css/styles.css";
-import "react-resizable/css/styles.css";
-import classes from "./Calculator.module.css";
+
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+
+import { setDraggableItems, setToggleBtn } from "../../services/store/store";
+
 import Display from "../calculatorElements/display/Display";
 import Equal from "../calculatorElements/equal/Equal";
 import Numbers from "../calculatorElements/numbers/Numbers";
 import Computing from "../calculatorElements/computing/Computing";
-import { useDispatch } from "react-redux";
-import { setDraggableItems, setToggleBtn } from "../../services/store/store";
-import { useSelector } from "react-redux";
+
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
+
+import classes from "./Calculator.module.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 

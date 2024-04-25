@@ -1,9 +1,13 @@
 import React, { useEffect } from "react";
-import classes from "./Equal.module.css";
-import math, { evaluate } from "mathjs";
+
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+
+import { evaluate } from "mathjs";
+
 import { computeValue, displayValue } from "../../../services/store/store";
+
+import classes from "./Equal.module.css";
 
 const Equal: React.FC = () => {
   const dispatch = useDispatch();
@@ -18,9 +22,7 @@ const Equal: React.FC = () => {
         dispatch(displayValue(result.toString()));
         dispatch(computeValue(""));
         dispatch(computeValue(result.toString()));
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (_error) {}
     }
   };
 

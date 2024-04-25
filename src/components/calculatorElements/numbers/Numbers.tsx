@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
-import classes from "./Numbers.module.css";
+
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+
 import { computeValue, displayValue } from "../../../services/store/store";
+
+import classes from "./Numbers.module.css";
 
 const Numbers: React.FC = () => {
   const dispatch = useDispatch();

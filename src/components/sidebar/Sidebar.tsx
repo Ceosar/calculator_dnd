@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import classes from "./Sidebar.module.css";
+
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
+import { setDraggableItems } from "../../services/store/store";
+
 import Equal from "../calculatorElements/equal/Equal";
 import Display from "../calculatorElements/display/Display";
 import Numbers from "../calculatorElements/numbers/Numbers";
 import Computing from "../calculatorElements/computing/Computing";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { setDraggableItems } from "../../services/store/store";
+
+import classes from "./Sidebar.module.css";
 
 const Sidebar: React.FC = () => {
   const [displayDrag, setDisplayDrag] = useState(true);

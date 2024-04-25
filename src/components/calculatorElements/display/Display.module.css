@@ -10,6 +10,8 @@
 
 .display_span {
     width: 100%;
+    margin: 0 auto;
+    max-width: 450px;
     height: 100%;
     background-color: rgb(243,244,246);
     display: flex;
@@ -18,4 +20,6 @@
     border-radius: 4px;
     cursor: pointer;
     user-select: none;
+    font-size: 50px;
+    overflow: hidden;
 }

@@ -8,6 +8,8 @@ body,
     font-family: "Montserrat", sans-serif;
     font-size: 32px;
     font-weight: 700;
+    background-color: rgb(243,244,246);
+    overflow: hidden;
 }
 
 .main_app {

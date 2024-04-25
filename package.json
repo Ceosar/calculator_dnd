@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.6",
     "@reduxjs/toolkit": "^2.2.3",
     "@types/react-redux": "^7.1.33",
+    "gsap": "^3.12.5",
     "mathjs": "^12.4.2",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",

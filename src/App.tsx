@@ -1,11 +1,22 @@
+import { useEffect } from "react";
+
 import { Provider } from "react-redux";
-import "./App.css";
+
+import gsap from "gsap";
+
+import store from "./services/store/store";
+
 import Calculator from "./components/calculator/Calculator";
 import Sidebar from "./components/sidebar/Sidebar";
-import store from "./services/store/store";
 import ToggleBtn from "./components/toggleBtn/ToggleBtn";
 
+import "./App.css";
+
 const App: React.FC = () => {
+  useEffect(() => {
+    const t1 = gsap.timeline({defaults: {duration:2}});
+    t1.from(".main_app", {opacity:0})
+  }, []);
   return (
     <Provider store={store}>
       <div className="main_app">
