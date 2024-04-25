@@ -45,11 +45,18 @@ const Calculator: React.FC = () => {
   }, [dispatch]);
 
   const onLayoutChange = (layoutChange: Layout[]) => {
+    layoutChange.map((item) => {
+      if (item.i == "__dropping-elem__") {
+        item.resizeHandles = [];
+      }
+    });
     setLayout(layoutChange);
     const draggableItems = layoutChange.map((item) => item.i);
     dispatch(setDraggableItems(draggableItems));
     localStorage.setItem("layout", JSON.stringify(layoutChange));
   };
+
+  addEventListener("mouseup", () => {console.log(1)})
 
   const onDrop = (lay: Layout[], item: Layout, e: any) => {
     const newLayout = [...lay].slice(0, -1);

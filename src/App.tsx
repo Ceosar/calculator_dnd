@@ -21,6 +21,7 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
       <div className="main_app">
+        {/* <></> */}
         <div className="calculator__container"></div>
         <ToggleBtn />
         <Sidebar />

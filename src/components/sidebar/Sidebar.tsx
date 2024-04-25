@@ -57,30 +57,12 @@ const Sidebar: React.FC = () => {
   }, [draggableItems]);
 
   const onDragStart = (event: React.DragEvent, params: any) => {
-    switch (params.elemId) {
-      case "display":
-        setDisplayDrag(false);
-        break;
-      case "equal":
-        setEqualDrag(false);
-        break;
-      case "computing":
-        setComputingDrag(false);
-        break;
-      case "numbers":
-        setNumbersDrag(false);
-        break;
-      default:
-        break;
-    }
-
     event.dataTransfer.setData("paramsElem", JSON.stringify(params));
   };
 
   return (
     <div
       className={classes.sidebar_wrapper}
-      // style={{ display: mode ? "flex" : "hidden" }}
       style={{ visibility: mode ? "visible" : "hidden" }}
     >
       <div
