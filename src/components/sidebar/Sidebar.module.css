@@ -1,6 +1,7 @@
 .sidebar_wrapper{
     width: 500px;
-    height: 500px;
+    /* height: 500px; */
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
     row-gap: 20px;

@@ -79,7 +79,7 @@ const Calculator: React.FC = () => {
           onDrop={onDrop}
           compactType={null}
           preventCollision
-          rowHeight={100}
+          rowHeight={90}
           onLayoutChange={onLayoutChange}
         >
           {layout.map((item: Layout, i: number) => {

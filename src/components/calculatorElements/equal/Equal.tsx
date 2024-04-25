@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./Equal.module.css";
+import math, { evaluate } from "mathjs";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { computeValue, displayValue } from "../../../services/store/store";
@@ -12,10 +13,31 @@ const Equal: React.FC = () => {
 
   const computeResult = () => {
     if (!mode) {
-      const result = eval(computingValue);
-      dispatch(displayValue(result));
+      try{
+        const result = evaluate(computingValue);
+        dispatch(displayValue(result.toString()));
+      }
+      catch(error){
+        console.log(error);
+      }
     }
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!mode) {
+        const numKey = event.key;
+        if(numKey === "Enter" || numKey === "="){
+          computeResult();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [mode, valueOnDisplay, dispatch]);
 
   return (
     <section className={classes.equal_wrapper}>

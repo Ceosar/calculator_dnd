@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./Computing.module.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -18,6 +18,36 @@ const Computing: React.FC = () => {
       dispatch(computeValue(computingValue + compute));
     }
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!mode) {
+        const numKey = event.key;
+        switch (numKey) {
+          case "+":
+            handleClickBtn("+");
+            break;
+          case "-":
+            handleClickBtn("-");
+            break;
+          case "*":
+            handleClickBtn("*");
+            break;
+          case "/":
+            handleClickBtn("/");
+            break;
+
+          default:
+            break;
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [mode, valueOnDisplay, dispatch]);
 
   return (
     <section className={classes.computing_wrapper}>

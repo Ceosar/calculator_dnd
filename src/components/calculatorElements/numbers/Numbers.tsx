@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./Numbers.module.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -18,6 +18,26 @@ const Numbers: React.FC = () => {
     }
   }
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!mode) {
+        const numKey = event.key;
+        if (!isNaN(Number(numKey))) {
+          dispatch(displayValue(valueOnDisplay + numKey.toString()));
+          dispatch(computeValue(computingValue + numKey.toString()));
+        } else if (numKey === ".") {
+          dispatch(displayValue(valueOnDisplay + numKey.toString()));
+          dispatch(computeValue(computingValue + numKey.toString()));
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [mode, valueOnDisplay, dispatch]);
+
   return (
     <section className={classes.numbers_wrapper}>
       <span className={classes.numbers_span}>
@@ -31,7 +51,7 @@ const Numbers: React.FC = () => {
         <button onClick={() => handleClickBtn("2")}>2</button>
         <button onClick={() => handleClickBtn("3")}>3</button>
         <button onClick={() => handleClickBtn("0")} className={classes.numbers_zero}>0</button>
-        <button onClick={() => handleClickBtn(",")}>,</button>
+        <button onClick={() => handleClickBtn(".")}>.</button>
       </span>
     </section>
   );

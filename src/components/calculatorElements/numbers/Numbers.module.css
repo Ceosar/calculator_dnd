@@ -1,6 +1,6 @@
 .numbers_wrapper {
     width: 100%;
-    height: 400px;
+    height: 380px;
     background-color: rgb(255, 255, 255);
     box-shadow: 3px 1px 8px 4px rgba(34, 60, 80, 0.2);
     padding: 5px;
@@ -19,7 +19,7 @@
     align-items: center;
     justify-content: space-between;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 90px);
+    grid-template-rows: repeat(3, 80px);
 }
 
 .numbers_span button {

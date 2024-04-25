@@ -1,6 +1,7 @@
 .calculator_wrapper{
     min-width: 500px;
-    min-height: 800px;
+    /* min-height: 800px; */
+    min-height: 70vh;
     border: 3px dashed rgba(130, 131, 131, 0.359);
     border-radius: 5px;
     display: flex;
@@ -15,5 +16,4 @@
     justify-content: start;
     flex-direction: column;
     gap: 20px;
-
 }

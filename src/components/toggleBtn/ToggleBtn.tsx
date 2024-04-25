@@ -17,7 +17,10 @@ const ToggleBtn: React.FC = () => {
 
     return (
     <>
-        <button onClick={() => handleClickBtn()}>Calculator {mode ? "on" : "off"}</button>
+        <button style={{
+            height:"10vh"
+        }}
+        onClick={() => handleClickBtn()}>Calculator {mode ? "on" : "off"}</button>
     </>
     );
 }
